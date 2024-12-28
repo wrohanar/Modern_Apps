@@ -1,0 +1,16 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: enforce-naming-conventions
+spec:
+  rules:
+  - name: check-resource-names
+    match:
+      resources:
+        kinds:
+        - Pod
+    validate:
+      message: "Pod names must start with 'app-'"
+      pattern:
+        metadata:
+          name: "app-*"
